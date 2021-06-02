@@ -1,0 +1,142 @@
+<html lang="en">
+<head>
+  <title>homepage</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  <style>
+  /* Make the image fully responsive */
+  .carousel-inner img {
+    width: 100%;
+    height: 17rem;
+  }
+  </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-warning mb-3">
+        <div class="container-fluid">
+          <a class="navbar-brand text-dark" href="/">ArticleSpot</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active text-dark" aria-current="page" href="/">Home</a>
+              </li>
+              {% if user.is_staff %}
+                <li class="nav-item">
+                  <a class="nav-link text-dark" href="/post_article/">Post Article</a>
+                </li>
+              {% endif %}
+              <li class="nav-item">
+                <a class="nav-link text-dark" href="/register/">Register</a>
+              </li>
+              {% if user.is_authenticated %}
+                <li class="nav-item">
+                  <a class="nav-link text-dark" href="/profile/" tabindex="-1">Profile</a>
+                </li>
+              {% else %}
+                <li class="nav-item">
+                  <a class="nav-link text-dark" href="/login/" tabindex="-1">login</a>
+                </li>
+              {% endif %}
+              {% if user.is_staff %}
+              <li class="nav-item">
+                <a class="nav-link text-dark" href="/adminpage/" tabindex="-1">admin</a>
+              </li>
+              {% endif %}
+              {% if user.is_authenticated %}
+                <li class="nav-item">
+                  <a class="nav-link text-dark" href="/logout/" tabindex="-1">logout</a>
+                </li>
+              {% endif %}
+            </ul>
+            <form class="d-flex" action="/search/" method="post">
+              {% csrf_token %}
+              <input class="form-control me-2" type="search" name="srh" placeholder="search title here..." aria-label="Search">
+              <button class="btn btn-dark text-white btn-outline-dark" type="submit">search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+      <div class="row m-2">
+        {% if messages %}
+          {% for message in messages %}
+              <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <strong>{{ message }}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+  <div class="container-fluid">
+    <div id="demo" class="carousel slide" data-ride="carousel">
+        <ul class="carousel-indicators">
+          <li data-target="#demo" data-slide-to="0" class="active"></li>
+          <li data-target="#demo" data-slide-to="1"></li>
+          <li data-target="#demo" data-slide-to="2"></li>
+        </ul>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSP83OuN8LCmOIRLK8r058fjEAe8ple--ycCQ&usqp=CAU" alt="Los Angeles" width="1100" height="500">
+            <div class="carousel-caption">
+              <h3>ArticleSpot</h3>
+              <p>Welcomes You</p>
+            </div>   
+          </div>
+          <div class="carousel-item">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdqtVE1ltb_QTWD0ugVgPbQQOsuvGoXtPmdw&usqp=CAU" alt="Chicago" width="1100" height="500">
+            <div class="carousel-caption">
+              <h3>ArticleSpot</h3>
+              <p>Welcomes You</p>
+            </div>   
+          </div>
+          <div class="carousel-item">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIL9VKiEUh4MJpl-tWvYASojOTIpqqVKp7xQ&usqp=CAU" alt="New York" width="1100" height="500">
+            <div class="carousel-caption">
+              <h3>ArticleSpot</h3>
+              <p>Welcomes You</p>
+            </div>   
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#demo" data-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </a>
+      </div>
+      <div>
+        <div class="bg-warning mt-3 mb-1 p-2">
+          <h3 class="text-center">Article List</h3>
+      </div>
+      <div class="row container-fluid">
+        <div class="col">
+          {% if search %}
+            {% for post in search %}
+              <h6>Your search results are:</h6>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Title:</b> <a class="text-decoration-none text-danger" href="/post_details/{{post.post_id}}/"><strong>{{post.title}}</strong></a><br/>
+            {% endfor %}
+          {% else %}
+            {% for post in posts %}
+              <b>Title:</b> <a class="text-decoration-none text-danger" href="/post_details/{{post.post_id}}/"><strong>{{post.title}}</strong></a><br/>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="d-flex text-body p-3 justify-content-center bg-warning">
+    <h6>&#169; all copyrights reserved</h6>
+  </footer>
+</body>
+</html>
